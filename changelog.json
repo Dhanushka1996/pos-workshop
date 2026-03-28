@@ -1,0 +1,22 @@
+{
+  "releases": [
+    {
+      "version": "1.0.0",
+      "date": "2026-03-27",
+      "type": "major",
+      "new": [
+        "Item Master with full product management (categories, brands, sub-categories)",
+        "Goods Received Notes (GRN) with supplier tracking",
+        "Stock Movements & Adjustments log",
+        "Inventory Dashboard with low-stock alerts",
+        "Multi-currency support (LKR, USD, EUR, GBP, AED, INR and more)",
+        "Excel Import system for bulk item upload",
+        "System Settings with business profile",
+        "Backup & Restore system",
+        "Auto-migration on startup"
+      ],
+      "improved": [],
+      "fixed": []
+    }
+  ]
+}

@@ -1,0 +1,437 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+ provider = "postgresql"
+  url      = env("postgresql://postgres:Dhanupg@199672@db.jxxrbwtntmumvtmpsqws.supabase.co:5432/postgres")
+}
+
+// ─── AUTH ──────────────────────────────────────────────────────────────────────
+
+model User {
+  id         String   @id @default(cuid())
+  email      String   @unique
+  password   String
+  full_name  String?
+  role       String   @default("cashier")
+  phone      String?
+  avatar_url String?
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("users")
+}
+
+// ─── SYSTEM SETTINGS ──────────────────────────────────────────────────────────
+
+model Setting {
+  id               String   @id @default("global")
+  business_name    String   @default("AutoShop POS")
+  currency_code    String   @default("LKR")
+  currency_symbol  String   @default("Rs")
+  symbol_position  String   @default("before")
+  decimal_places   Int      @default(2)
+  tax_rate         Float    @default(0)
+  receipt_footer   String?
+  created_at       DateTime @default(now())
+  updated_at       DateTime @updatedAt
+
+  @@map("settings")
+}
+
+// ─── INVENTORY MASTER DATA ─────────────────────────────────────────────────────
+
+model Category {
+  id             String        @id @default(cuid())
+  name           String        @unique
+  description    String?
+  color          String?       @default("#6366f1")
+  created_at     DateTime      @default(now())
+  updated_at     DateTime      @updatedAt
+  sub_categories SubCategory[]
+  products       Product[]
+
+  @@map("categories")
+}
+
+model SubCategory {
+  id          String    @id @default(cuid())
+  name        String
+  category_id String
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  category    Category  @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  products    Product[]
+
+  @@unique([name, category_id])
+  @@map("sub_categories")
+}
+
+model Brand {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  description String?
+  logo_url    String?
+  created_at  DateTime  @default(now())
+  updated_at  DateTime  @updatedAt
+  products    Product[]
+
+  @@map("brands")
+}
+
+model Supplier {
+  id           String    @id @default(cuid())
+  name         String
+  contact_name String?
+  email        String?
+  phone        String?
+  address      String?
+  notes        String?
+  is_active    Boolean   @default(true)
+  created_at   DateTime  @default(now())
+  updated_at   DateTime  @updatedAt
+  products     Product[]
+  grns         GRN[]
+
+  @@map("suppliers")
+}
+
+model UnitOfMeasure {
+  id           String   @id @default(cuid())
+  name         String   @unique
+  abbreviation String   @unique
+  created_at   DateTime @default(now())
+
+  base_products Product[] @relation("BaseUOM")
+  bulk_products Product[] @relation("BulkUOM")
+
+  @@map("units_of_measure")
+}
+
+// ─── PRODUCT (ITEM MASTER) ─────────────────────────────────────────────────────
+
+model Product {
+  id                    String  @id @default(cuid())
+  item_code             String  @unique
+  name                  String
+  description           String?
+  vehicle_compatibility String?
+
+  // Classification
+  category_id     String?
+  sub_category_id String?
+  brand_id        String?
+  supplier_id     String?
+
+  // Pricing
+  cost_price      Float @default(0)
+  retail_price    Float @default(0)
+  wholesale_price Float @default(0)
+  min_price       Float @default(0)
+
+  // Inventory
+  current_stock Float @default(0)
+  reorder_level Float @default(5)
+  reorder_qty   Float @default(10)
+
+  // Inventory control
+  track_stock Boolean @default(true)
+
+  // UOM
+  base_uom_id       String?
+  bulk_uom_id       String?
+  bulk_qty          Float   @default(1)   // conversion ratio: 1 bulk = N base units
+  bulk_cost_price   Float   @default(0)
+  bulk_retail_price Float   @default(0)
+
+  // Status
+  is_active     Boolean @default(true)
+  is_assembly   Boolean @default(false)   // marks item as an assembly/dismantle type
+  product_type  String  @default("NORMAL") // NORMAL | ASSEMBLY
+  created_at    DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  // Relations
+  category        Category?      @relation(fields: [category_id], references: [id])
+  sub_category    SubCategory?   @relation(fields: [sub_category_id], references: [id])
+  brand           Brand?         @relation(fields: [brand_id], references: [id])
+  supplier        Supplier?      @relation(fields: [supplier_id], references: [id])
+  base_uom        UnitOfMeasure? @relation("BaseUOM", fields: [base_uom_id], references: [id])
+  bulk_uom        UnitOfMeasure? @relation("BulkUOM", fields: [bulk_uom_id], references: [id])
+  barcodes        Barcode[]
+  stock_movements StockMovement[]
+  batches         Batch[]
+  grn_items       GRNItem[]
+
+  // Assembly relations
+  assemblies_as_parent    Assembly[]             @relation("AssemblyParent")
+  assembly_components     AssemblyComponent[]    @relation("ComponentProduct")
+  dismantle_logs          DismantleLog[]         @relation("DismantleComponent")
+
+  // Disassembly relations
+  disassemblies           Disassembly[]          @relation("DisassemblyParent")
+  disassembly_components  DisassemblyComponent[] @relation("DisassemblyComponent")
+
+  // Sales
+  sale_items SaleItem[]
+
+  @@map("products")
+}
+
+// ─── DISMANTLING / COMPONENT EXTRACTION ───────────────────────────────────────
+// Movement types extended: DISMANTLE_OUT (parent -stock) | DISMANTLE_IN (component +stock)
+
+// One purchased assembly unit (e.g., a specific 1JZ engine bought for Rs 250,000)
+model Assembly {
+  id            String   @id @default(cuid())
+  product_id    String                       // parent product (the assembly item)
+  grn_item_id   String?                      // source GRN item (nullable for manual assemblies)
+  ref_number    String?  @unique             // auto-generated: ASM-000001
+  reference     String?                      // user-provided: vehicle reg, serial, chassis no., etc.
+  purchase_cost Float    @default(0)
+  status        String   @default("intact")  // intact | partial | complete
+  notes         String?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  product        Product             @relation("AssemblyParent",    fields: [product_id], references: [id])
+  grn_item       GRNItem?            @relation(fields: [grn_item_id], references: [id])
+  components     AssemblyComponent[]
+  dismantle_logs DismantleLog[]
+
+  @@map("assemblies")
+}
+
+// Each component (part) within an assembly, with qty and extraction tracking
+model AssemblyComponent {
+  id             String   @id @default(cuid())
+  assembly_id    String
+  product_id     String                       // the component product
+  qty_total      Float    @default(1)         // how many of this part the assembly contains
+  qty_extracted  Float    @default(0)         // how many have been extracted so far
+  allocated_cost Float    @default(0)         // cost share from the assembly's purchase_cost
+  notes          String?
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+
+  assembly       Assembly     @relation(fields: [assembly_id], references: [id], onDelete: Cascade)
+  product        Product      @relation("ComponentProduct", fields: [product_id], references: [id])
+  dismantle_logs DismantleLog[]
+
+  @@unique([assembly_id, product_id])
+  @@map("assembly_components")
+}
+
+// Audit log — every extraction event (partial or full) is recorded here
+model DismantleLog {
+  id                    String   @id @default(cuid())
+  assembly_id           String
+  assembly_component_id String
+  product_id            String
+  qty_extracted         Float    @default(1)
+  notes                 String?
+  created_at            DateTime @default(now())
+
+  assembly           Assembly          @relation(fields: [assembly_id],           references: [id])
+  assembly_component AssemblyComponent @relation(fields: [assembly_component_id], references: [id])
+  product            Product           @relation("DismantleComponent",            fields: [product_id], references: [id])
+
+  @@map("dismantle_logs")
+}
+
+// ─── DISASSEMBLY (REVERSE BOM / STOCK RECOVERY) ───────────────────────────────
+// Tracks a disassembly event: one or more units of a product broken into parts,
+// with each component either recovered to stock or flagged as sold/scrapped.
+
+model Disassembly {
+  id         String   @id @default(cuid())
+  ref_number String   @unique             // auto-generated: DSM-000001
+  product_id String                       // parent product being disassembled
+  quantity   Float    @default(1)         // how many units of parent are disassembled
+  unit_cost  Float    @default(0)         // cost basis of the disassembled unit
+  notes      String?
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  product    Product                @relation("DisassemblyParent",    fields: [product_id], references: [id])
+  components DisassemblyComponent[]
+
+  @@map("disassemblies")
+}
+
+// Each part extracted during a disassembly event
+model DisassemblyComponent {
+  id             String   @id @default(cuid())
+  disassembly_id String
+  product_id     String                       // the recovered component product
+  qty            Float    @default(1)
+  unit_cost      Float    @default(0)         // allocated cost for this component
+  condition      String   @default("good")    // good | damaged | scrap
+  recovered      Boolean  @default(true)      // true = stock IN, false = note only (sold/used)
+  notes          String?
+  created_at     DateTime @default(now())
+
+  disassembly Disassembly @relation(fields: [disassembly_id], references: [id], onDelete: Cascade)
+  product     Product     @relation("DisassemblyComponent", fields: [product_id], references: [id])
+
+  @@map("disassembly_components")
+}
+
+// ─── SEQUENCES (auto-increment counters) ──────────────────────────────────────
+model Sequence {
+  key   String @id
+  value Int    @default(0)
+
+  @@map("sequences")
+}
+
+model Barcode {
+  id         String   @id @default(cuid())
+  product_id String
+  barcode    String   @unique
+  is_primary Boolean  @default(false)
+  created_at DateTime @default(now())
+  product    Product  @relation(fields: [product_id], references: [id], onDelete: Cascade)
+
+  @@map("barcodes")
+}
+
+// ─── STOCK OPERATIONS ──────────────────────────────────────────────────────────
+// Movement types: GRN | SALE | ADJUSTMENT | TRANSFER | DISPATCH | RETURN | OPENING
+
+model StockMovement {
+  id         String   @id @default(cuid())
+  product_id String
+  type       String
+  quantity   Float
+  balance    Float
+  reference  String?
+  notes      String?
+  cost_price Float?
+  created_by String?
+  created_at DateTime @default(now())
+
+  product Product @relation(fields: [product_id], references: [id], onDelete: Cascade)
+
+  @@map("stock_movements")
+}
+
+// ─── GRN (GOODS RECEIVED NOTE) ─────────────────────────────────────────────────
+
+model GRN {
+  id          String   @id @default(cuid())
+  grn_number  String   @unique
+  supplier_id String?
+  total_cost  Float    @default(0)
+  notes       String?
+  status         String    @default("confirmed")
+  invoice_number String?               // supplier invoice/bill number
+  received_date  DateTime?             // physical receipt date
+  created_by     String?
+  created_at     DateTime  @default(now())
+  updated_at     DateTime  @updatedAt
+
+  supplier Supplier? @relation(fields: [supplier_id], references: [id])
+  items    GRNItem[]
+  batches  Batch[]
+
+  @@map("grns")
+}
+
+model GRNItem {
+  id         String @id @default(cuid())
+  grn_id     String
+  product_id String
+  quantity   Float
+  cost_price Float
+  total      Float
+
+  grn        GRN        @relation(fields: [grn_id], references: [id], onDelete: Cascade)
+  product    Product    @relation(fields: [product_id], references: [id])
+  assemblies Assembly[]               // assemblies spawned from this item
+
+  @@map("grn_items")
+}
+
+// ─── SALES (POS) ───────────────────────────────────────────────────────────────
+
+model Sale {
+  id            String   @id @default(cuid())
+  sale_number   String   @unique
+  subtotal      Float    @default(0)
+  discount      Float    @default(0)
+  tax           Float    @default(0)
+  total         Float    @default(0)
+  paid_amount   Float    @default(0)
+  change_amount Float    @default(0)
+  payment_type  String   @default("cash")
+  status        String   @default("completed")
+  notes         String?
+  created_by    String?
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  items    SaleItem[]
+  payments SalePayment[]
+
+  @@map("sales")
+}
+
+model SaleItem {
+  id         String  @id @default(cuid())
+  sale_id    String
+  product_id String
+  quantity   Float
+  unit_price Float
+  cost_price Float   @default(0)
+  discount   Float   @default(0)
+  total      Float
+
+  sale    Sale    @relation(fields: [sale_id],    references: [id], onDelete: Cascade)
+  product Product @relation(fields: [product_id], references: [id])
+
+  @@map("sale_items")
+}
+
+model SalePayment {
+  id        String  @id @default(cuid())
+  sale_id   String
+  method    String
+  amount    Float
+  reference String?
+
+  sale Sale @relation(fields: [sale_id], references: [id], onDelete: Cascade)
+
+  @@map("sale_payments")
+}
+
+model HeldSale {
+  id         String   @id @default(cuid())
+  label      String?
+  cart_data  String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("held_sales")
+}
+
+// ─── BATCH MANAGEMENT ──────────────────────────────────────────────────────────
+
+model Batch {
+  id            String   @id @default(cuid())
+  product_id    String
+  batch_number  String
+  grn_id        String?
+  quantity      Float
+  remaining_qty Float
+  cost_price    Float
+  created_at    DateTime @default(now())
+  updated_at    DateTime @updatedAt
+
+  product Product @relation(fields: [product_id], references: [id])
+  grn     GRN?    @relation(fields: [grn_id], references: [id])
+
+  @@map("batches")
+}
