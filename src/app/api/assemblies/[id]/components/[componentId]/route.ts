@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+
 import { z } from 'zod';
 
 const updateSchema = z.object({
@@ -14,6 +14,7 @@ export async function PUT(
   { params }: { params: { id: string; componentId: string } },
 ) {
   try {
+    const { prisma } = await import('@/lib/prisma');
     const component = await prisma.assemblyComponent.findFirst({
       where: { id: params.componentId, assembly_id: params.id },
     });
