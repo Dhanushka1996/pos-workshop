@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+
 import { z } from 'zod';
 
 const schema = z.object({
@@ -34,6 +34,7 @@ export async function POST(
   { params }: { params: { id: string } },
 ) {
   try {
+    const { prisma } = await import('@/lib/prisma');
     const body   = await req.json();
     const parsed = schema.safeParse(body);
     if (!parsed.success) {
