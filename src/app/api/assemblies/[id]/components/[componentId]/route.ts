@@ -14,7 +14,8 @@ export async function PUT(
   { params }: { params: { id: string; componentId: string } },
 ) {
   try {
-    const { prisma } = await import('@/lib/prisma');
+    const { prisma } = await import('@/lib/prisma'); // ✅ ADD THIS
+    
     const component = await prisma.assemblyComponent.findFirst({
       where: { id: params.componentId, assembly_id: params.id },
     });
