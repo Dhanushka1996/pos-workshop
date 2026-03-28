@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { peekAssemblyRef, generateAssemblyItemCode } from '@/lib/sequences';
-import prisma from "@/lib/prisma";
+import { prisma } from "@/lib/prisma";
 /**
  * GET /api/assemblies/next-ref
  * Returns a preview of the next assembly reference number (not consumed).
