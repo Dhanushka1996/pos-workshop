@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import prisma from "@/lib/prisma";
 import { z } from 'zod';
 import { generateAssemblyRef, generateAssemblyItemCode } from '@/lib/sequences';
 
@@ -40,6 +40,7 @@ const createSchema = z.union([
 // GET /api/assemblies — list all assemblies with summary info
 export async function GET(req: NextRequest) {
   try {
+    const { prisma } = await import('@/lib/prisma'); // 
     const { searchParams } = new URL(req.url);
     const status = searchParams.get('status');
     const search = searchParams.get('q')?.trim() ?? '';

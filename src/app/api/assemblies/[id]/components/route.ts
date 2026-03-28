@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import prisma from "@/lib/prisma";
 import { z } from 'zod';
 
 const addSchema = z.object({
@@ -12,6 +12,7 @@ const addSchema = z.object({
 // POST /api/assemblies/[id]/components — add a component to the assembly
 export async function POST(req: NextRequest, { params }: { params: { id: string } }) {
   try {
+    const { prisma } = await import('@/lib/prisma'); // 
     const assembly = await prisma.assembly.findUnique({
       where:  { id: params.id },
       select: { id: true, product_id: true },

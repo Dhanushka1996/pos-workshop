@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { peekAssemblyRef, generateAssemblyItemCode } from '@/lib/sequences';
-
+import prisma from "@/lib/prisma";
 /**
  * GET /api/assemblies/next-ref
  * Returns a preview of the next assembly reference number (not consumed).
@@ -8,6 +8,7 @@ import { peekAssemblyRef, generateAssemblyItemCode } from '@/lib/sequences';
  */
 export async function GET() {
   try {
+    const { prisma } = await import('@/lib/prisma'); //
     const [ref_number, item_code] = await Promise.all([
       peekAssemblyRef(),
       // peek next item code without consuming

@@ -13,7 +13,7 @@ export default async function DashboardLayout({
 }) {
   const session = await getServerSession(authOptions);
   if (!session) redirect('/login');
-
+console.log("DB URL:", process.env.DATABASE_URL);
   const user = await prisma.user.findUnique({
     where: { id: session.user.id },
   });

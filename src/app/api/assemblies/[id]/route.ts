@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import prisma from "@/lib/prisma";
 import { z } from 'zod';
 
 const updateSchema = z.object({
@@ -11,6 +11,7 @@ const updateSchema = z.object({
 // GET /api/assemblies/[id] — full detail: assembly + components + history
 export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
   try {
+    const { prisma } = await import('@/lib/prisma'); // 
     const assembly = await prisma.assembly.findUnique({
       where: { id: params.id },
       include: {
