@@ -15,7 +15,7 @@
 import { useCallback } from 'react';
 import { useCurrencyStore } from '@/store/currencyStore';
 import { formatCurrency, type CurrencyConfig } from '@/lib/currency';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 export interface UseCurrencyReturn {

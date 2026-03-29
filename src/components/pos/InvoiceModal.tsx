@@ -3,7 +3,7 @@
 import { useRef } from 'react';
 import { X, Printer, ShoppingBag } from 'lucide-react';
 import { useCurrency } from '@/hooks/useCurrency';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 interface SaleItem {

@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { peekDisassemblyRef } from '@/lib/sequences';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 /** GET /api/disassembly/next-ref — preview the next DSM reference (non-consuming). */

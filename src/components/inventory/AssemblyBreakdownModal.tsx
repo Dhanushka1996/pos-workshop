@@ -22,7 +22,7 @@ import { cn } from '@/lib/utils';
 import { useBreakdown, getComponentRemaining } from '@/hooks/inventory/useAssemblies';
 import type { Assembly, AssemblyComponent } from '@/hooks/inventory/useAssemblies';
 import { useCurrency } from '@/hooks/useCurrency';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 interface Props {

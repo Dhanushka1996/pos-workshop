@@ -1,3 +1,4 @@
+export const runtime = "nodejs";
 import type { Metadata } from 'next';
 import { SignupForm } from '@/components/auth/SignupForm';
 import { Wrench } from 'lucide-react';

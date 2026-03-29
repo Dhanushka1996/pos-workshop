@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { cn } from '@/lib/utils';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {

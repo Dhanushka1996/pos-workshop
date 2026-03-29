@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import type { Profile } from '@/types';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 interface AuthState {

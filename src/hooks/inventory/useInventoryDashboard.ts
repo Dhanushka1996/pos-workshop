@@ -1,6 +1,6 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 export function useInventoryDashboard() {

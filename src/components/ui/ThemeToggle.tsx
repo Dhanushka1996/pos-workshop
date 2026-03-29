@@ -3,7 +3,7 @@
 import { useTheme } from 'next-themes';
 import { Moon, Sun } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 export function ThemeToggle({ className }: { className?: string }) {

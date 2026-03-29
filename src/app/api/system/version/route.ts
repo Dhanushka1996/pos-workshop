@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import path from 'path';
 import fs   from 'fs';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 const ROOT         = path.resolve(process.cwd());

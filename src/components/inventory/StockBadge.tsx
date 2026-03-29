@@ -1,7 +1,7 @@
 'use client';
 import { cn } from '@/lib/utils';
 import { getStockStatus } from '@/types/inventory';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 interface StockBadgeProps {

@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { useSession, signOut as nextAuthSignOut } from 'next-auth/react';
 import type { Profile } from '@/types';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 export function useAuth() {

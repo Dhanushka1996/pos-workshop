@@ -5,7 +5,7 @@ import { AuthSessionProvider } from '@/components/providers/SessionProvider';
 import { QueryProvider } from '@/components/providers/QueryProvider';
 import { CurrencyProvider } from '@/components/providers/CurrencyProvider';
 import './globals.css';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 const inter = Inter({

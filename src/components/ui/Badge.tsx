@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 import type { UserRole } from '@/types';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 const roleStyles: Record<UserRole, string> = {

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { X, Clock, Trash2, RefreshCw, Play } from 'lucide-react';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 interface HeldSale {

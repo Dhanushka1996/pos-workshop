@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 import { generateDisassemblyRef } from '@/lib/sequences';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 // ─── Validation schema ────────────────────────────────────────────────────────

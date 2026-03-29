@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { buildTemplate } from '@/lib/import/itemImport';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 /**

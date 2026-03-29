@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { categoryUpdateSchema } from '@/lib/validations/inventory';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 async function categoryExists(name: string, excludeId: string): Promise<boolean> {

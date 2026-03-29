@@ -7,6 +7,7 @@ import { prisma } from "@/lib/prisma";
  * Also returns a suggested item code for a new assembly product.
  */
 
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 export async function GET() {

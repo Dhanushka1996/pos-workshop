@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic';
 // ─── MOVEMENT TYPES ────────────────────────────────────────────────────────────
 export type MovementType = 'GRN' | 'SALE' | 'ADJUSTMENT' | 'TRANSFER' | 'DISPATCH' | 'RETURN' | 'OPENING';
-
+export const runtime = "nodejs";
 export const MOVEMENT_TYPE_LABELS: Record<MovementType, string> = {
   GRN:        'Goods Received',
   SALE:       'Sale',

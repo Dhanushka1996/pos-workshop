@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 interface ModalProps {

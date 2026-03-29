@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 interface StatCardProps {

@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { generateInvoiceRef } from '@/lib/sequences';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 interface PaymentInput  { method: string; amount: number; reference?: string }

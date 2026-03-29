@@ -2,7 +2,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { buildConfig, DEFAULT_CURRENCY, type CurrencyConfig } from '@/lib/currency';
 import { useCurrencyStore } from '@/store/currencyStore';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 export interface AppSettings {

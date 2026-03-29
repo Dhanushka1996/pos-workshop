@@ -6,7 +6,7 @@ import { cn }               from '@/lib/utils';
 import { useCurrency }      from '@/hooks/useCurrency';
 import { useCostDistribution } from '@/hooks/inventory/useAssemblies';
 import type { Assembly, AssemblyComponent } from '@/hooks/inventory/useAssemblies';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 interface Props {

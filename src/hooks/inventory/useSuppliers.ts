@@ -1,7 +1,7 @@
 'use client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import type { SupplierInput } from '@/lib/validations/inventory';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 export interface Supplier {

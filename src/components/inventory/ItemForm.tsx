@@ -19,7 +19,7 @@ import { cn } from '@/lib/utils';
 import { useCurrencyConfig } from '@/hooks/useSettings';
 import { formatCurrency } from '@/lib/currency';
 import type { ProductType, UOMType, CategoryType, SubCategoryType } from '@/types/inventory';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 interface ItemFormProps {

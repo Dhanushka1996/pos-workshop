@@ -12,7 +12,7 @@ import { signupSchema, type SignupInput } from '@/lib/validations/auth';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 const ROLE_OPTIONS = [

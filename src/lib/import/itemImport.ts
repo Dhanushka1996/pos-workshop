@@ -11,7 +11,7 @@
  */
 
 import * as XLSX from 'xlsx';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 // ── Raw import data shape ─────────────────────────────────────────────────

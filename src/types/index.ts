@@ -1,5 +1,5 @@
 export type UserRole = 'admin' | 'cashier' | 'mechanic';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 export interface Profile {

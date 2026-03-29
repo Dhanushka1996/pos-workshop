@@ -12,7 +12,7 @@ import Link from 'next/link';
 import { loginSchema, type LoginInput } from '@/lib/validations/auth';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 export function LoginForm() {

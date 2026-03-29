@@ -4,7 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { X, CreditCard, Banknote, RefreshCw, AlertCircle, CheckCircle2, Layers } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { useCurrency } from '@/hooks/useCurrency';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 interface CartItem {

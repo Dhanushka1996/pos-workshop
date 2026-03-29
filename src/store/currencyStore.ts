@@ -13,7 +13,7 @@
 
 import { create } from 'zustand';
 import { formatCurrency, DEFAULT_CURRENCY, type CurrencyConfig } from '@/lib/currency';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 interface CurrencyState {

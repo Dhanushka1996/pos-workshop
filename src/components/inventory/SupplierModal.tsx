@@ -8,7 +8,7 @@ import { X, Loader2, Truck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { useCreateSupplier, useUpdateSupplier, type Supplier } from '@/hooks/inventory/useSuppliers';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 const schema = z.object({

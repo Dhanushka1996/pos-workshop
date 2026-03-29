@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { productSchema } from '@/lib/validations/inventory';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 const PRODUCT_INCLUDE = {

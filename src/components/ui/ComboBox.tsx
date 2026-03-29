@@ -7,7 +7,7 @@ import {
 import { createPortal } from 'react-dom';
 import { Check, ChevronDown, Plus, X, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 export interface ComboOption {

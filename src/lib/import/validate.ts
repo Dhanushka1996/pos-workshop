@@ -11,7 +11,7 @@
  *   - Mapping application + row validation
  *   - localStorage template persistence
  */
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 // ── System field definitions ───────────────────────────────────────────────

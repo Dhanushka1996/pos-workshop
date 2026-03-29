@@ -1,6 +1,6 @@
 import 'next-auth';
 import 'next-auth/jwt';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 declare module 'next-auth' {

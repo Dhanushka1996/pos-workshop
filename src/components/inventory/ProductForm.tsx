@@ -12,7 +12,7 @@ import { useBrands } from '@/hooks/inventory/useBrands';
 import { useSuppliers } from '@/hooks/inventory/useSuppliers';
 import { useCreateProduct, useUpdateProduct, type Product } from '@/hooks/inventory/useProducts';
 import { useRouter } from 'next/navigation';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 const schema = z.object({

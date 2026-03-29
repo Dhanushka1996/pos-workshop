@@ -5,7 +5,7 @@ import { ArrowUpCircle, ArrowDownCircle, RefreshCw, Activity, ChevronLeft, Chevr
 import { cn } from '@/lib/utils';
 import { useStockMovements } from '@/hooks/inventory/useStockMovements';
 import { useProducts } from '@/hooks/inventory/useProducts';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 const PAGE_SIZE = 15;

@@ -9,7 +9,7 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { RoleBadge } from '@/components/ui/Badge';
 import { getInitials } from '@/lib/utils';
 import type { Profile } from '@/types';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 interface DashboardHeaderProps {

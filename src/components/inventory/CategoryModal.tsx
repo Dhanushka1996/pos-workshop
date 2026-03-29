@@ -7,7 +7,7 @@ import { X, Loader2, Tag } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { useCreateCategory, useUpdateCategory, type Category } from '@/hooks/inventory/useCategories';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 const PRESET_COLORS = [

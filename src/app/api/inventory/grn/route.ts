@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { grnSchema } from '@/lib/validations/inventory';
 import { generateGRNRef, generateAssemblyRef } from '@/lib/sequences';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 // ── GET /api/inventory/grn ─────────────────────────────────────────────────

@@ -8,7 +8,7 @@ import { X, Loader2, Award } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { useCreateBrand, useUpdateBrand, type Brand } from '@/hooks/inventory/useBrands';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 const schema = z.object({

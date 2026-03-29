@@ -16,7 +16,7 @@ import { useEffect } from 'react';
 import { useSettings } from '@/hooks/useSettings';
 import { useCurrencyStore } from '@/store/currencyStore';
 import { buildConfig } from '@/lib/currency';
-
+export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 export function CurrencyProvider({ children }: { children: React.ReactNode }) {
