@@ -3,9 +3,9 @@ import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 
 const updateSchema = z.object({
-  qty_total:      z.number().positive().optional(),
-  allocated_cost: z.number().min(0).optional(),
-  notes:          z.string().optional(),
+  qty_total: z.coerce.number().positive().optional(),
+  allocated_cost: z.coerce.number().min(0).optional(),
+  notes: z.string().optional(),
 });
 
 // PUT /api/assemblies/[id]/components/[componentId]
@@ -14,35 +14,71 @@ export async function PUT(
   { params }: { params: { id: string; componentId: string } },
 ) {
   try {
-    const component = await prisma.assemblyComponent.findFirst({
-      where: { id: params.componentId, assembly_id: params.id },
-    });
-    if (!component) return NextResponse.json({ error: 'Component not found' }, { status: 404 });
+    const assemblyId = params.id;
+    const componentId = params.componentId;
 
-    const body   = await req.json();
-    const parsed = updateSchema.safeParse(body);
-    if (!parsed.success) {
-      return NextResponse.json({ error: parsed.error.flatten() }, { status: 422 });
+    const component = await prisma.assemblyComponent.findFirst({
+      where: {
+        id: componentId,
+        assembly_id: assemblyId, // ✅ correct based on your schema
+      },
+    });
+
+    if (!component) {
+      return NextResponse.json(
+        { error: 'Component not found' },
+        { status: 404 }
+      );
     }
 
-    // qty_total cannot go below already-extracted amount
-    if (parsed.data.qty_total !== undefined && parsed.data.qty_total < component.qty_extracted) {
+    const body = await req.json();
+    const parsed = updateSchema.safeParse(body);
+
+    if (!parsed.success) {
       return NextResponse.json(
-        { error: `Cannot set qty lower than already-extracted amount (${component.qty_extracted})` },
-        { status: 422 },
+        { error: parsed.error.flatten() },
+        { status: 422 }
+      );
+    }
+
+    const data = parsed.data;
+
+    // Prevent invalid qty
+    if (
+      data.qty_total !== undefined &&
+      data.qty_total < component.qty_extracted
+    ) {
+      return NextResponse.json(
+        {
+          error: `Cannot set qty lower than already-extracted amount (${component.qty_extracted})`,
+        },
+        { status: 422 }
       );
     }
 
     const updated = await prisma.assemblyComponent.update({
-      where: { id: params.componentId },
-      data:  parsed.data,
-      include: { product: { select: { id: true, item_code: true, name: true } } },
+      where: {
+        id: componentId, // ✅ OK because id is unique
+      },
+      data: data,
+      include: {
+        product: {
+          select: {
+            id: true,
+            item_code: true,
+            name: true,
+          },
+        },
+      },
     });
 
     return NextResponse.json(updated);
   } catch (err) {
-    console.error('[PUT /api/assemblies/[id]/components/[componentId]]', err);
-    return NextResponse.json({ error: 'Failed to update component' }, { status: 500 });
+    console.error('[PUT ERROR]', err);
+    return NextResponse.json(
+      { error: 'Failed to update component' },
+      { status: 500 }
+    );
   }
 }
 
@@ -52,22 +88,45 @@ export async function DELETE(
   { params }: { params: { id: string; componentId: string } },
 ) {
   try {
-    const component = await prisma.assemblyComponent.findFirst({
-      where: { id: params.componentId, assembly_id: params.id },
-    });
-    if (!component) return NextResponse.json({ error: 'Component not found' }, { status: 404 });
+    const assemblyId = params.id;
+    const componentId = params.componentId;
 
-    if (component.qty_extracted > 0) {
+    const component = await prisma.assemblyComponent.findFirst({
+      where: {
+        id: componentId,
+        assembly_id: assemblyId, // ✅ correct
+      },
+    });
+
+    if (!component) {
       return NextResponse.json(
-        { error: 'Cannot remove a component that has already been partially or fully extracted.' },
-        { status: 409 },
+        { error: 'Component not found' },
+        { status: 404 }
       );
     }
 
-    await prisma.assemblyComponent.delete({ where: { id: params.componentId } });
+    if (component.qty_extracted > 0) {
+      return NextResponse.json(
+        {
+          error:
+            'Cannot remove a component that has already been partially or fully extracted.',
+        },
+        { status: 409 }
+      );
+    }
+
+    await prisma.assemblyComponent.delete({
+      where: {
+        id: componentId,
+      },
+    });
+
     return NextResponse.json({ success: true });
   } catch (err) {
-    console.error('[DELETE /api/assemblies/[id]/components/[componentId]]', err);
-    return NextResponse.json({ error: 'Failed to remove component' }, { status: 500 });
+    console.error('[DELETE ERROR]', err);
+    return NextResponse.json(
+      { error: 'Failed to remove component' },
+      { status: 500 }
+    );
   }
 }
