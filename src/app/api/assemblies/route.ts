@@ -3,6 +3,8 @@ import { prisma } from "@/lib/prisma";
 import { z } from 'zod';
 import { generateAssemblyRef, generateAssemblyItemCode } from '@/lib/sequences';
 
+export const dynamic = 'force-dynamic';
+
 const componentSchema = z.object({
   product_id:     z.string().min(1),
   qty_total:      z.number().positive(),

@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from "@/lib/prisma";
 import { z } from 'zod';
 
+
 const schema = z.object({
   /**
    * IDs of AssemblyComponent records whose parts were SOLD or USED outside
