@@ -1,15 +1,16 @@
-import { PrismaClient } from "@prisma/client";
-export const runtime = "nodejs";
-export const dynamic = 'force-dynamic';
+import { PrismaClient } from '@prisma/client'
 
 const globalForPrisma = globalThis as unknown as {
-  prisma: PrismaClient | undefined;
-};
+  prisma: PrismaClient | undefined
+}
 
 export const prisma =
   globalForPrisma.prisma ??
-  new PrismaClient();
+  new PrismaClient({
+    log:
+      process.env.NODE_ENV === 'production'
+        ? ['error', 'warn']
+        : ['query', 'error', 'warn'],
+  })
 
-if (process.env.NODE_ENV !== "production") {
-  globalForPrisma.prisma = prisma;
-}
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma
