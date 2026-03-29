@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { parseExcelToRaw, parseTsvToRaw, autoDetectColumns } from '@/lib/import/itemImport';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * POST /api/import/items/parse-raw
  *

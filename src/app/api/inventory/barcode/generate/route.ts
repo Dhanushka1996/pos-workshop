@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 
+export const dynamic = 'force-dynamic';
+
 // Generate a simple EAN-13 style barcode number
 function generateBarcode(): string {
   const prefix = '200'; // custom prefix

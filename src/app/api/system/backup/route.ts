@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import path from 'path';
 import fs   from 'fs';
 
+export const dynamic = 'force-dynamic';
+
 // We call the backup utility directly (server-side Node.js only)
 const ROOT       = path.resolve(process.cwd());
 const DB_PATH    = path.join(ROOT, 'prisma', 'dev.db');

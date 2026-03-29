@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import path from 'path';
 import fs   from 'fs';
 
+export const dynamic = 'force-dynamic';
+
 const ROOT         = path.resolve(process.cwd());
 const versionPath  = path.join(ROOT, 'version.json');
 const changelogPath = path.join(ROOT, 'changelog.json');

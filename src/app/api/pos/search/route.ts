@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
 // GET /api/pos/search?q=<query>
 // Ultra-fast product search for POS (name, item_code, barcode)
 export async function GET(req: NextRequest) {

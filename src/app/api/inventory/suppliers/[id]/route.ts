@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { supplierUpdateSchema } from '@/lib/validations/inventory';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(_: NextRequest, { params }: { params: { id: string } }) {
   try {
     const supplier = await prisma.supplier.findUnique({ where: { id: params.id } });

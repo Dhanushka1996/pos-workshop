@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server';
 import path from 'path';
 import fs   from 'fs';
 
+export const dynamic = 'force-dynamic';
+
 const ROOT          = path.resolve(process.cwd());
 const LOCAL_MANIFEST = path.join(ROOT, 'update-manifest.json');
 const VERSION_FILE   = path.join(ROOT, 'version.json');

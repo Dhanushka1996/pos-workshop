@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { buildTemplate } from '@/lib/import/itemImport';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * GET /api/import/items/template
  * Returns a downloadable Excel file with headers, sample rows, and instructions.

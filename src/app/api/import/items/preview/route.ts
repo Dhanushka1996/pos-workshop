@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { parseExcelBuffer, buildSummary, type ImportRow } from '@/lib/import/itemImport';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * POST /api/import/items/preview
  * Accepts multipart/form-data with a single "file" field (Excel).

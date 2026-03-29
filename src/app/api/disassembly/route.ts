@@ -3,6 +3,8 @@ import { prisma } from '@/lib/prisma';
 import { z } from 'zod';
 import { generateDisassemblyRef } from '@/lib/sequences';
 
+export const dynamic = 'force-dynamic';
+
 // ─── Validation schema ────────────────────────────────────────────────────────
 
 const componentSchema = z.object({

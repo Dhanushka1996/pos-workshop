@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { stockAdjustmentSchema } from '@/lib/validations/inventory';
 
+export const dynamic = 'force-dynamic';
+
 // POST /api/inventory/stock-adjustment
 export async function POST(req: NextRequest) {
   try {

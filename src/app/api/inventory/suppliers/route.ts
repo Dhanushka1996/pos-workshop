@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { supplierSchema } from '@/lib/validations/inventory';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const suppliers = await prisma.supplier.findMany({ orderBy: { name: 'asc' } });

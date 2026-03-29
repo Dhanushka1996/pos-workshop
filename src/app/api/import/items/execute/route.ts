@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import type { ImportRow, ExecuteResult } from '@/lib/import/itemImport';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * POST /api/import/items/execute
  * Body: { mode: 'create' | 'upsert', rows: ImportRow[] }

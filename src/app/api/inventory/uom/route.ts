@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { uomSchema } from '@/lib/validations/inventory';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const uoms = await prisma.unitOfMeasure.findMany({ orderBy: { name: 'asc' } });

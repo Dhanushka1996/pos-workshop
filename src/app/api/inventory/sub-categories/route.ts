@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { subCategorySchema } from '@/lib/validations/inventory';
 
+export const dynamic = 'force-dynamic';
+
 async function subCategoryExists(name: string, category_id: string, excludeId?: string): Promise<boolean> {
   const lower = name.trim().toLowerCase();
   const all   = await prisma.subCategory.findMany({

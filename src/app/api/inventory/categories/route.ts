@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { categorySchema } from '@/lib/validations/inventory';
 
+export const dynamic = 'force-dynamic';
+
 // Case-insensitive duplicate check (works with SQLite + PostgreSQL)
 async function categoryExists(name: string, excludeId?: string): Promise<boolean> {
   const lower = name.trim().toLowerCase();

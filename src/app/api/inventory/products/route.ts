@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { productSchema } from '@/lib/validations/inventory';
 
+export const dynamic = 'force-dynamic';
+
 const PRODUCT_INCLUDE = {
   category:     true,
   sub_category: true,

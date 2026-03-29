@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { generateInvoiceRef } from '@/lib/sequences';
 
+export const dynamic = 'force-dynamic';
+
 interface PaymentInput  { method: string; amount: number; reference?: string }
 interface CartItemInput {
   product_id: string;
