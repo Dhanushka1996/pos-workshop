@@ -19,25 +19,31 @@ export async function POST(request: NextRequest) {
 
   const { email, password, full_name, role, phone } = parsed.data;
 
-  const existing = await prisma.user.findUnique({ where: { email } });
-  if (existing) {
-    return NextResponse.json({ error: 'Email already registered' }, { status: 409 });
+  try {
+    const existing = await prisma.user.findUnique({ where: { email } });
+    if (existing) {
+      return NextResponse.json({ error: 'Email already registered' }, { status: 409 });
+    }
+
+    const hashed = await bcrypt.hash(password, 12);
+
+    const user = await prisma.user.create({
+      data: {
+        email,
+        password: hashed,
+        full_name: full_name ?? null,
+        role,
+        phone: phone ?? null,
+      },
+      select: {
+        id: true, email: true, full_name: true, role: true, created_at: true,
+      },
+    });
+
+    return NextResponse.json({ user }, { status: 201 });
+  } catch (err) {
+    console.error('[SIGNUP ERROR]', err);
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return NextResponse.json({ error: `Failed to create account: ${message}` }, { status: 500 });
   }
-
-  const hashed = await bcrypt.hash(password, 12);
-
-  const user = await prisma.user.create({
-    data: {
-      email,
-      password: hashed,
-      full_name: full_name ?? null,
-      role,
-      phone: phone ?? null,
-    },
-    select: {
-      id: true, email: true, full_name: true, role: true, created_at: true,
-    },
-  });
-
-  return NextResponse.json({ user }, { status: 201 });
 }
