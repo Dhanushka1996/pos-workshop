@@ -5,7 +5,11 @@ import { prisma } from './prisma';
 export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
+// Works on Vercel (any deployment URL) and localhost
+const secret = process.env.NEXTAUTH_SECRET ?? 'fallback-secret-change-in-prod';
+
 export const authOptions: NextAuthOptions = {
+  secret,
   session: { strategy: 'jwt' },
   pages: { signIn: '/login' },
   providers: [
