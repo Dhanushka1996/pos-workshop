@@ -6,6 +6,8 @@ import { ItemForm } from '@/components/inventory/ItemForm';
 import { useProduct, useUpdateProduct } from '@/hooks/inventory/useProducts';
 import type { ProductInput } from '@/lib/validations/inventory';
 
+export const dynamic = 'force-dynamic';
+
 export default function EditItemPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const { data: product, isLoading } = useProduct(params.id);

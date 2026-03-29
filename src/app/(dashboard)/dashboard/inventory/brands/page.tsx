@@ -6,6 +6,8 @@ import { Plus, Pencil, Trash2, Award } from 'lucide-react';
 import { useBrands, useDeleteBrand, type Brand } from '@/hooks/inventory/useBrands';
 import { BrandModal } from '@/components/inventory/BrandModal';
 
+export const dynamic = 'force-dynamic';
+
 export default function BrandsPage() {
   const { data: brands = [], isLoading } = useBrands();
   const deleteBrand = useDeleteBrand();

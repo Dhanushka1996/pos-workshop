@@ -12,6 +12,8 @@ import { useSuppliers }  from '@/hooks/inventory/useSuppliers';
 import { useCurrency }   from '@/hooks/useCurrency';
 import { cn }            from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 interface LineItem {
   product_id:   string;
   product_name: string;

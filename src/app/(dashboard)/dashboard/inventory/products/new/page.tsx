@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { Package, ArrowLeft } from 'lucide-react';
 import { ProductForm } from '@/components/inventory/ProductForm';
 
+export const dynamic = 'force-dynamic';
+
 export default function NewProductPage() {
   return (
     <div className="p-6 max-w-4xl mx-auto space-y-6">

@@ -17,6 +17,8 @@ function formatDate(iso: string) {
   }).format(new Date(iso));
 }
 
+export const dynamic = 'force-dynamic';
+
 export default function DisassemblyDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params);
   const { data, isLoading, isError } = useDisassembly(id);

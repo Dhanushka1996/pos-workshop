@@ -6,6 +6,8 @@ import { DashboardHeader } from '@/components/dashboard/DashboardHeader';
 import { Sidebar } from '@/components/dashboard/Sidebar';
 import type { Profile } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 export default async function DashboardLayout({
   children,
 }: {

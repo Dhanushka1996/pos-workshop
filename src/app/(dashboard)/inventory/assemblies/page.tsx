@@ -15,6 +15,8 @@ import {
 } from '@/hooks/inventory/useAssemblies';
 import { AssemblyBreakdownModal } from '@/components/inventory/AssemblyBreakdownModal';
 
+export const dynamic = 'force-dynamic';
+
 // ── Status config ──────────────────────────────────────────────────────────
 const STATUS_CONFIG: Record<AssemblyStatus, { label: string; color: string; icon: React.ElementType }> = {
   intact:   { label: 'Intact',    color: 'sky',     icon: Package },

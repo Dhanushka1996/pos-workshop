@@ -8,6 +8,8 @@ import { useBrands, useCreateBrand, useUpdateBrand, useDeleteBrand } from '@/hoo
 import { Modal } from '@/components/ui/Modal';
 import { cn } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 interface BrandRow {
   id:           string;
   name:         string;

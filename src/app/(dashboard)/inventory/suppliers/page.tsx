@@ -7,6 +7,8 @@ import { Modal } from '@/components/ui/Modal';
 import { cn } from '@/lib/utils';
 import type { SupplierType } from '@/types/inventory';
 
+export const dynamic = 'force-dynamic';
+
 interface SupplierFormData {
   name: string; contact_name: string; email: string;
   phone: string; address: string; notes: string; is_active: boolean;

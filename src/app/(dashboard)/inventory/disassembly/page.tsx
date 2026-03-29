@@ -7,6 +7,8 @@ import { cn } from '@/lib/utils';
 import { useDisassemblies, getDisassemblySummary } from '@/hooks/inventory/useDisassembly';
 import { useCurrency } from '@/hooks/useCurrency';
 
+export const dynamic = 'force-dynamic';
+
 function timeAgo(iso: string) {
   const diff = Date.now() - new Date(iso).getTime();
   const mins = Math.floor(diff / 60_000);

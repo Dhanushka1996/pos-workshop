@@ -7,6 +7,8 @@ import { useGRNs } from '@/hooks/inventory/useStockMovements';
 import { useCurrency } from '@/hooks/useCurrency';
 import { cn } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 export default function GRNListPage() {
   const router = useRouter();
   const [page, setPage] = useState(1);

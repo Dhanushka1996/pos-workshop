@@ -19,6 +19,8 @@ import { useCurrency } from '@/hooks/useCurrency';
 import { cn } from '@/lib/utils';
 import type { ProductType } from '@/types/inventory';
 
+export const dynamic = 'force-dynamic';
+
 const STATUS_OPTIONS = [
   { value: '',             label: 'All Status' },
   { value: 'active',       label: 'Active' },

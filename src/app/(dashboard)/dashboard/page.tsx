@@ -19,6 +19,8 @@ import { RoleBadge } from '@/components/ui/Badge';
 import { formatDate } from '@/lib/utils';
 import type { Profile, UserRole } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 // Role-specific quick stats (placeholder data — replace with real queries)
 function getRoleStats(role: UserRole) {
   switch (role) {

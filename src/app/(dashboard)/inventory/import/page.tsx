@@ -23,6 +23,8 @@ import {
 import { cn } from '@/lib/utils';
 import type { ImportRow, ImportSummary, ExecuteResult } from '@/lib/import/itemImport';
 
+export const dynamic = 'force-dynamic';
+
 // ── Local types ────────────────────────────────────────────────────────────
 type Step    = 'input' | 'preview' | 'results';
 type InputTab = 'file' | 'paste';

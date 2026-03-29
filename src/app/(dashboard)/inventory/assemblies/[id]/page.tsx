@@ -18,6 +18,8 @@ import { useProducts } from '@/hooks/inventory/useProducts';
 import { AssemblyBreakdownModal }   from '@/components/inventory/AssemblyBreakdownModal';
 import { CostDistributionModal }    from '@/components/inventory/CostDistributionModal';
 
+export const dynamic = 'force-dynamic';
+
 // ── Status config ──────────────────────────────────────────────────────────
 const STATUS: Record<AssemblyStatus, { label: string; color: string }> = {
   intact:   { label: 'Intact',   color: 'sky'     },

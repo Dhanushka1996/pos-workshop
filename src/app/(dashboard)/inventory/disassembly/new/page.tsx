@@ -14,6 +14,9 @@ import { cn } from '@/lib/utils';
 import { useCurrency } from '@/hooks/useCurrency';
 import { useCreateDisassembly } from '@/hooks/inventory/useDisassembly';
 
+export const dynamic = 'force-dynamic';
+
+
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface ProductOption {

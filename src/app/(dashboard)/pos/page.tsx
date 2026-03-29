@@ -11,6 +11,8 @@ import { PaymentModal }     from '@/components/pos/PaymentModal';
 import { InvoiceModal }     from '@/components/pos/InvoiceModal';
 import { HeldSalesDrawer }  from '@/components/pos/HeldSalesDrawer';
 
+export const dynamic = 'force-dynamic';
+
 // ── Types ──────────────────────────────────────────────────────────────────────
 
 interface SearchProduct {

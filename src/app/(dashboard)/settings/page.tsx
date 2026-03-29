@@ -15,6 +15,8 @@ import {
 } from '@/hooks/useSystem';
 import { cn } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 // ── Helpers ────────────────────────────────────────────────────────────────
 const PREVIEW_AMOUNT = 1234567.89;
 

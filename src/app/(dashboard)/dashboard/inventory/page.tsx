@@ -10,6 +10,8 @@ import { useInventoryDashboard } from '@/hooks/inventory/useInventoryDashboard';
 import { useCurrency } from '@/hooks/useCurrency';
 import { cn } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 function formatDate(dateString: string) {
   return new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' }).format(new Date(dateString));
 }

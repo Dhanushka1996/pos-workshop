@@ -8,6 +8,8 @@ import { useCategories, useDeleteCategory } from '@/hooks/inventory/useCategorie
 import { CategoryModal } from '@/components/inventory/CategoryModal';
 import type { Category } from '@/hooks/inventory/useCategories';
 
+export const dynamic = 'force-dynamic';
+
 export default function CategoriesPage() {
   const { data: categories = [], isLoading } = useCategories();
   const deleteCategory = useDeleteCategory();

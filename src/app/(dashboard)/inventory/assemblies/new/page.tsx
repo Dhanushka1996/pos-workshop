@@ -15,6 +15,8 @@ import { useCreateAssembly } from '@/hooks/inventory/useAssemblies';
 import { useCategories } from '@/hooks/inventory/useCategories';
 import { useBrands } from '@/hooks/inventory/useBrands';
 
+export const dynamic = 'force-dynamic';
+
 // ── Types ──────────────────────────────────────────────────────────────────
 interface ProductOption {
   id: string;

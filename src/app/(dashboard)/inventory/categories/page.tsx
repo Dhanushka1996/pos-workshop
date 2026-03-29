@@ -14,6 +14,8 @@ import { Modal } from '@/components/ui/Modal';
 import { cn } from '@/lib/utils';
 import type { CategoryType, SubCategoryType } from '@/types/inventory';
 
+export const dynamic = 'force-dynamic';
+
 const COLOR_PRESETS = [
   '#6366f1','#8b5cf6','#ec4899','#ef4444','#f97316',
   '#eab308','#22c55e','#14b8a6','#3b82f6','#06b6d4',

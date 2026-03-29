@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { Activity } from 'lucide-react';
 import { StockMovementTable } from '@/components/inventory/StockMovementTable';
 
+export const dynamic = 'force-dynamic';
+
 export default function StockMovementsPage() {
   return (
     <div className="p-6 space-y-6">

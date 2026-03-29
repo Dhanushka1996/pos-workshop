@@ -10,6 +10,8 @@ import { useCurrency } from '@/hooks/useCurrency';
 import { cn } from '@/lib/utils';
 import type { ProductType } from '@/types/inventory';
 
+export const dynamic = 'force-dynamic';
+
 const ADJUST_TYPES = [
   { value: 'ADJUSTMENT', label: 'Adjustment (Manual)', dir: 'both', color: 'text-amber-400' },
   { value: 'DISPATCH',   label: 'Dispatch / Usage',   dir: 'out',  color: 'text-orange-400' },

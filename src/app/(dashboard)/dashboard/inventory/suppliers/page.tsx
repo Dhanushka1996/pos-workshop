@@ -7,6 +7,8 @@ import { cn } from '@/lib/utils';
 import { useSuppliers, useDeleteSupplier, type Supplier } from '@/hooks/inventory/useSuppliers';
 import { SupplierModal } from '@/components/inventory/SupplierModal';
 
+export const dynamic = 'force-dynamic';
+
 export default function SuppliersPage() {
   const { data: suppliers = [], isLoading } = useSuppliers();
   const deleteSupplier = useDeleteSupplier();

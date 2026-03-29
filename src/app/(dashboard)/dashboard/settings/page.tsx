@@ -8,6 +8,8 @@ import { formatDate } from '@/lib/utils';
 import { getInitials } from '@/lib/utils';
 import type { UserRole } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 export default async function SettingsPage() {
   const session = await getServerSession(authOptions);
   if (!session) redirect('/login');

@@ -6,6 +6,8 @@ import { ItemForm } from '@/components/inventory/ItemForm';
 import { useCreateProduct } from '@/hooks/inventory/useProducts';
 import type { ProductInput } from '@/lib/validations/inventory';
 
+export const dynamic = 'force-dynamic';
+
 export default function NewItemPage() {
   const router = useRouter();
   const { mutateAsync, isPending } = useCreateProduct();

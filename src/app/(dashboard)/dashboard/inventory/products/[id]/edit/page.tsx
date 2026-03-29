@@ -6,6 +6,8 @@ import { Package, ArrowLeft, Loader2 } from 'lucide-react';
 import { ProductForm } from '@/components/inventory/ProductForm';
 import { useProduct } from '@/hooks/inventory/useProducts';
 
+export const dynamic = 'force-dynamic';
+
 export default function EditProductPage() {
   const params = useParams<{ id: string }>();
   const { data: product, isLoading, isError } = useProduct(params.id);

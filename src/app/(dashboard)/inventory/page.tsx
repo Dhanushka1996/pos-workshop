@@ -10,6 +10,8 @@ import { StockBadge, MovementTypeBadge } from '@/components/inventory/StockBadge
 import { useCurrency } from '@/hooks/useCurrency';
 import { cn } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 interface StatCardProps {
   label:     string;
   value:     string | number;

@@ -10,6 +10,8 @@ import { cn }          from '@/lib/utils';
 import { useCurrency } from '@/hooks/useCurrency';
 import { useGRN }      from '@/hooks/inventory/useStockMovements';
 
+export const dynamic = 'force-dynamic';
+
 export default function GRNDetailPage() {
   const { id }  = useParams<{ id: string }>();
   const router  = useRouter();
