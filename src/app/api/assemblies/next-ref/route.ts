@@ -6,6 +6,9 @@ import { prisma } from "@/lib/prisma";
  * Returns a preview of the next assembly reference number (not consumed).
  * Also returns a suggested item code for a new assembly product.
  */
+
+export const dynamic = 'force-dynamic';
+
 export async function GET() {
   try {
     const { prisma } = await import('@/lib/prisma'); //
