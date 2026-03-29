@@ -1,5 +1,7 @@
 import { prisma } from '@/lib/prisma';
 
+export const dynamic = 'force-dynamic';
+
 /**
  * Atomically increments a named sequence and returns its new value.
  * Uses Prisma upsert + increment which is safe under SQLite's serialised writes.

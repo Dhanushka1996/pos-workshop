@@ -13,6 +13,8 @@ import { useSuppliers } from '@/hooks/inventory/useSuppliers';
 import { useCreateProduct, useUpdateProduct, type Product } from '@/hooks/inventory/useProducts';
 import { useRouter } from 'next/navigation';
 
+export const dynamic = 'force-dynamic';
+
 const schema = z.object({
   name: z.string().min(1, 'Product name is required'),
   item_code: z.string().min(1, 'Item code is required'),

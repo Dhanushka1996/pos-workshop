@@ -3,6 +3,8 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { buildConfig, DEFAULT_CURRENCY, type CurrencyConfig } from '@/lib/currency';
 import { useCurrencyStore } from '@/store/currencyStore';
 
+export const dynamic = 'force-dynamic';
+
 export interface AppSettings {
   id:               string;
   business_name:    string;

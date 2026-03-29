@@ -1,6 +1,8 @@
 import { forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   label?: string;
   error?: string;

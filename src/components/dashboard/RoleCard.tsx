@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils';
 import { ROLE_CONFIG } from '@/types';
 import type { UserRole } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 const ROLE_ICONS = {
   admin:    Shield,
   cashier:  CreditCard,

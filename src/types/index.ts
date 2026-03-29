@@ -1,5 +1,7 @@
 export type UserRole = 'admin' | 'cashier' | 'mechanic';
 
+export const dynamic = 'force-dynamic';
+
 export interface Profile {
   id: string;
   email: string;

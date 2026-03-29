@@ -1,6 +1,8 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
 
+export const dynamic = 'force-dynamic';
+
 export function useInventoryDashboard() {
   return useQuery({
     queryKey: ['inventory-dashboard'],

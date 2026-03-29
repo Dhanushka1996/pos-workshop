@@ -6,6 +6,8 @@ import { QueryProvider } from '@/components/providers/QueryProvider';
 import { CurrencyProvider } from '@/components/providers/CurrencyProvider';
 import './globals.css';
 
+export const dynamic = 'force-dynamic';
+
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',

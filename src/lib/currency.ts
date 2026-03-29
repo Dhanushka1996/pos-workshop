@@ -1,5 +1,5 @@
 // ─── Currency Configuration ───────────────────────────────────────────────────
-
+export const dynamic = 'force-dynamic';
 export interface CurrencyConfig {
   code:            string;
   symbol:          string;

@@ -12,6 +12,8 @@
 
 import * as XLSX from 'xlsx';
 
+export const dynamic = 'force-dynamic';
+
 // ── Raw import data shape ─────────────────────────────────────────────────
 /** Raw spreadsheet contents before any column mapping or validation. */
 export interface RawImportData {

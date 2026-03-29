@@ -1,6 +1,8 @@
 'use client';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
+export const dynamic = 'force-dynamic';
+
 export interface Category {
   id:              string;
   name:            string;

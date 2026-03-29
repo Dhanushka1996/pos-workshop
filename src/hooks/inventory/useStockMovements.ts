@@ -2,6 +2,8 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import type { StockAdjustInput, GRNInput } from '@/lib/validations/inventory';
 
+export const dynamic = 'force-dynamic';
+
 export interface StockMovement {
   id:          string;
   product_id:  string;

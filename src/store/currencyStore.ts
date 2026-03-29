@@ -14,6 +14,8 @@
 import { create } from 'zustand';
 import { formatCurrency, DEFAULT_CURRENCY, type CurrencyConfig } from '@/lib/currency';
 
+export const dynamic = 'force-dynamic';
+
 interface CurrencyState {
   /** Current currency configuration — defaults to LKR until settings load */
   config: CurrencyConfig;

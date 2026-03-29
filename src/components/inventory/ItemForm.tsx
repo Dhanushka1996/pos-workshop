@@ -20,6 +20,8 @@ import { useCurrencyConfig } from '@/hooks/useSettings';
 import { formatCurrency } from '@/lib/currency';
 import type { ProductType, UOMType, CategoryType, SubCategoryType } from '@/types/inventory';
 
+export const dynamic = 'force-dynamic';
+
 interface ItemFormProps {
   product?:   ProductType;
   onSubmit:   (data: ProductInput) => Promise<void>;

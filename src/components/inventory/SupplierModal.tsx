@@ -9,6 +9,8 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { useCreateSupplier, useUpdateSupplier, type Supplier } from '@/hooks/inventory/useSuppliers';
 
+export const dynamic = 'force-dynamic';
+
 const schema = z.object({
   name: z.string().min(1, 'Supplier name is required').max(200),
   contact_name: z.string().optional(),

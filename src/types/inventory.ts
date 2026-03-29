@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic';
 // ─── MOVEMENT TYPES ────────────────────────────────────────────────────────────
 export type MovementType = 'GRN' | 'SALE' | 'ADJUSTMENT' | 'TRANSFER' | 'DISPATCH' | 'RETURN' | 'OPENING';
 

@@ -9,6 +9,8 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { useCreateBrand, useUpdateBrand, type Brand } from '@/hooks/inventory/useBrands';
 
+export const dynamic = 'force-dynamic';
+
 const schema = z.object({
   name: z.string().min(1, 'Brand name is required').max(100),
   description: z.string().optional(),

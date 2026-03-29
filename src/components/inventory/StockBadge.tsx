@@ -2,6 +2,8 @@
 import { cn } from '@/lib/utils';
 import { getStockStatus } from '@/types/inventory';
 
+export const dynamic = 'force-dynamic';
+
 interface StockBadgeProps {
   current:      number;
   reorderLevel: number;

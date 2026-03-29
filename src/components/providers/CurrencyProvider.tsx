@@ -17,6 +17,8 @@ import { useSettings } from '@/hooks/useSettings';
 import { useCurrencyStore } from '@/store/currencyStore';
 import { buildConfig } from '@/lib/currency';
 
+export const dynamic = 'force-dynamic';
+
 export function CurrencyProvider({ children }: { children: React.ReactNode }) {
   const { data: settings } = useSettings();
   const setConfig          = useCurrencyStore(s => s.setConfig);

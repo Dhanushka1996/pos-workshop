@@ -6,6 +6,8 @@ import { cn } from '@/lib/utils';
 import { useStockMovements } from '@/hooks/inventory/useStockMovements';
 import { useProducts } from '@/hooks/inventory/useProducts';
 
+export const dynamic = 'force-dynamic';
+
 const PAGE_SIZE = 15;
 
 function MovementTypeBadge({ type }: { type: string }) {

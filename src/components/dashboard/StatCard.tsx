@@ -1,5 +1,7 @@
 import { cn } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 interface StatCardProps {
   label: string;
   value: string;

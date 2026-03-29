@@ -12,6 +12,8 @@
  *   - localStorage template persistence
  */
 
+export const dynamic = 'force-dynamic';
+
 // ── System field definitions ───────────────────────────────────────────────
 export const SYSTEM_FIELDS = [
   { value: 'item_code',       label: 'Item Code',        group: 'Core',   required: true  },

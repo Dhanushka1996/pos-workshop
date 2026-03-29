@@ -1,5 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 
+export const dynamic = 'force-dynamic';
+
 // ── Types ──────────────────────────────────────────────────────────────────
 
 export interface VersionInfo {

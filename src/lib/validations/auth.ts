@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+export const dynamic = 'force-dynamic';
+
 export const loginSchema = z.object({
   email: z
     .string()

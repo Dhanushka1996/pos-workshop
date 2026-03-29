@@ -1,6 +1,8 @@
 import 'next-auth';
 import 'next-auth/jwt';
 
+export const dynamic = 'force-dynamic';
+
 declare module 'next-auth' {
   interface Session {
     user: {

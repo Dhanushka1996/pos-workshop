@@ -1,6 +1,8 @@
 import { cn } from '@/lib/utils';
 import type { UserRole } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 const roleStyles: Record<UserRole, string> = {
   admin:    'bg-violet-500/15 text-violet-300 border-violet-500/25',
   cashier:  'bg-sky-500/15    text-sky-300    border-sky-500/25',

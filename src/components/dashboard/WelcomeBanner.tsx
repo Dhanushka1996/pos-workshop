@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { formatDate } from '@/lib/utils';
 import type { Profile } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 interface WelcomeBannerProps {
   profile: Profile;
 }

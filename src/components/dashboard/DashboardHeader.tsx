@@ -10,6 +10,8 @@ import { RoleBadge } from '@/components/ui/Badge';
 import { getInitials } from '@/lib/utils';
 import type { Profile } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 interface DashboardHeaderProps {
   profile: Profile;
 }

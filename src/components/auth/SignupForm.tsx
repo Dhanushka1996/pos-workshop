@@ -13,6 +13,8 @@ import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Select } from '@/components/ui/Select';
 
+export const dynamic = 'force-dynamic';
+
 const ROLE_OPTIONS = [
   { value: 'cashier',  label: 'Cashier'  },
   { value: 'mechanic', label: 'Mechanic' },

@@ -24,6 +24,8 @@ import {
 import { cn } from '@/lib/utils';
 import type { UserRole } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 interface SubItem {
   label: string;
   href: string;

@@ -2,6 +2,8 @@ import { create } from 'zustand';
 import { devtools } from 'zustand/middleware';
 import type { Profile } from '@/types';
 
+export const dynamic = 'force-dynamic';
+
 interface AuthState {
   profile: Profile | null;
   isLoading: boolean;

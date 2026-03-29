@@ -1,5 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
+export const dynamic = 'force-dynamic';
+
 const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };

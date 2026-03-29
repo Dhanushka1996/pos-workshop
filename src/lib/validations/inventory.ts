@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+export const dynamic = 'force-dynamic';
+
 // ─── CATEGORY ──────────────────────────────────────────────────────────────────
 export const categorySchema = z.object({
   name:        z.string().min(1, 'Name is required').max(100),

@@ -2,6 +2,8 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import type { ProductInput } from '@/lib/validations/inventory';
 
+export const dynamic = 'force-dynamic';
+
 const BASE = '/api/inventory/products';
 
 /** Minimal shape of a product returned by the API — extend as needed. */

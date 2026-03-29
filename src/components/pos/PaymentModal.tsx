@@ -5,6 +5,8 @@ import { X, CreditCard, Banknote, RefreshCw, AlertCircle, CheckCircle2, Layers }
 import { cn } from '@/lib/utils';
 import { useCurrency } from '@/hooks/useCurrency';
 
+export const dynamic = 'force-dynamic';
+
 interface CartItem {
   product_id: string;
   item_code:  string;
