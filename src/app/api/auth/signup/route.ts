@@ -6,15 +6,28 @@ export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
-  console.log("DB:", process.env.DATABASE_URL);
-  console.log("DIRECT:", process.env.DIRECT_URL);
+  try {
+    console.log("DB:", process.env.DATABASE_URL?.split('@')[1]);
+    console.log("DIRECT:", process.env.DIRECT_URL?.split('@')[1]);
 
-  const body = await request.json().catch(() => null);
-  if (!body) {
-    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+    const body = await request.json().catch(() => null);
+    if (!body) {
+      return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+    }
+
+    // your existing logic here
+    // example:
+    // const existingUser = await prisma.user.findUnique(...)
+
+    return NextResponse.json({ success: true });
+
+  } catch (err) {
+    const message = err instanceof Error ? err.message : 'Unknown error';
+    return NextResponse.json(
+      { error: `Failed to create account: ${message}` },
+      { status: 500 }
+    );
   }
-
-  // your existing logic continues here...
 }
 
   const parsed = signupSchema.safeParse(body);
