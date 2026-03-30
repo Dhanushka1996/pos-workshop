@@ -6,8 +6,16 @@ export const runtime = "nodejs";
 export const dynamic = 'force-dynamic';
 
 export async function POST(request: NextRequest) {
+  console.log("DB:", process.env.DATABASE_URL);
+  console.log("DIRECT:", process.env.DIRECT_URL);
+
   const body = await request.json().catch(() => null);
-  if (!body) return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  if (!body) {
+    return NextResponse.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
+
+  // your existing logic continues here...
+}
 
   const parsed = signupSchema.safeParse(body);
   if (!parsed.success) {
